@@ -6,7 +6,9 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/spf13/cobra"
+	"google.golang.org/grpc"
 
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/endpoints/rpc"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/boot"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/config"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/log"
@@ -19,7 +21,7 @@ func ExecuteCmdFn(_ *cobra.Command, args []string) {
 	appName, version := config.Application, config.Version
 	enablers := &boot.Enablers{
 		HttpServerEnabled: true,
-		GrpcServerEnabled: false,
+		GrpcServerEnabled: true,
 		DatabaseEnabled:   true,
 	}
 
@@ -35,9 +37,14 @@ func ExecuteCmdFn(_ *cobra.Command, args []string) {
 			Port: cfg.HttpPort,
 		}
 
+		appCtx.GrpcConfig = &boot.GrpcConfig{
+			Host: cfg.Host,
+			Port: cfg.GrpcPort,
+		}
+
 		appCtx.SecurityConfig = &boot.SecurityConfig{
 			TokenSignatureKey:    cfg.TokenSignatureKey,
-			TokenVerificationKey: cfg.TokenSignatureKey,
+			TokenVerificationKey: cfg.TokenVerificationKey,
 		}
 
 		appCtx.DatabaseConfig = &boot.DatabaseConfig{
@@ -49,8 +56,12 @@ func ExecuteCmdFn(_ *cobra.Command, args []string) {
 		}
 	}
 
-	err := boot.Init(appName, version, args, logger, enablers, builder, func(appCtx boot.ApplicationContext) error {
+	builder.GrpcServer = func(appCtx *boot.ApplicationContext) (*grpc.ServiceDesc, any) {
+		grpcServer := rpc.NewBankApiGrpcServer(appCtx.AuthenticationService, appCtx.AuthorizationService, appCtx.PrincipalManager)
+		return &rpc.BankApi_ServiceDesc, grpcServer
+	}
 
+	err := boot.Init(appName, version, args, logger, enablers, builder, func(appCtx boot.ApplicationContext) error {
 		return nil
 	})
 	if err != nil {

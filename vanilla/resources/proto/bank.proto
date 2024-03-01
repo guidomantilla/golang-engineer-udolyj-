@@ -1,0 +1,41 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+option go_package = "./core/endpoints/rpc";
+
+message Exception {
+  uint32 code = 1;
+  string message = 2;
+  repeated string errors = 3;
+}
+
+message Principal {
+  string username = 1;
+  string role = 2;
+  string password = 3;
+  string passphrase = 4;
+  bool enabled = 5;
+  bool non_locked = 6;
+  bool non_expired = 7;
+  bool password_non_expired = 8;
+  bool signup_done = 9;
+  repeated string resources = 10;
+  string token = 11;
+}
+
+
+message LoginRequest {
+  string username = 1;
+  string password = 3;
+}
+
+message LoginResponse {
+  string username = 1;
+  string role = 2;
+  repeated string resources = 10;
+  string token = 11;
+}
+
+service BankApi {
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc GetPrincipal(google.protobuf.Empty) returns (Principal);
+}

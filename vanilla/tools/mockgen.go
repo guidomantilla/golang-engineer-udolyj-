@@ -8,5 +8,5 @@ package tools
 //go:generate mockgen -package=security -source ../pkg/security/types.go -destination ../pkg/security/mocks.go
 //go:generate mockgen -package=server -destination ../pkg/server/mocks.go github.com/qmdx00/lifecycle Server
 
-//go:generate mockgen -package=endpoints -destination ../core/endpoints/mocks.go -source ../core/endpoints/types.go
+//go:generate mockgen -package=rpc -destination ../core/endpoints/rpc/mocks.go -source ../core/endpoints/rpc/types.go
 //go:generate mockgen -package=services -destination ../core/services/mocks.go -source ../core/services/types.go
