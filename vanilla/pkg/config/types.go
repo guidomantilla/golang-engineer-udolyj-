@@ -1,7 +1,7 @@
 package config
 
 const (
-	Application = "golang-engineer-udolyj/vanilla"
+	Application = "golang-engineer-udolyj"
 	Version     = "v0.1.0"
 )
 

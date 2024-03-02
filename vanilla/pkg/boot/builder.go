@@ -104,12 +104,10 @@ func NewBeanBuilder(ctx context.Context) *BeanBuilder {
 				}
 				config := &gorm.Config{
 					SkipDefaultTransaction: true,
-					Logger: slogGorm.New(
-						slogGorm.WithLogger(appCtx.Logger.RetrieveLogger().(*slog.Logger)),
-						slogGorm.WithTraceAll(), slogGorm.WithRecordNotFoundError(),
-					),
+					Logger:                 slogGorm.New(slogGorm.WithLogger(appCtx.Logger.RetrieveLogger().(*slog.Logger)), slogGorm.WithTraceAll(), slogGorm.WithRecordNotFoundError()),
 				}
-				return datasource.NewDefaultDatasource(appCtx.DatasourceContext, mysql.Open(*appCtx.DatabaseConfig.DatasourceUrl), config)
+				//TODO: create a factory function for enabling different database types not only: mysql.Open
+				return datasource.NewDefaultDatasource(appCtx.DatasourceContext, mysql.Open(appCtx.DatasourceContext.GetUrl()), config)
 			}
 			return nil
 		},
@@ -133,6 +131,13 @@ func NewBeanBuilder(ctx context.Context) *BeanBuilder {
 			return security.NewDefaultPasswordManager(appCtx.PasswordEncoder, appCtx.PasswordGenerator)
 		},
 		PrincipalManager: func(appCtx *ApplicationContext) security.PrincipalManager {
+			if appCtx.Enablers.DatabaseEnabled {
+				if appCtx.DatabaseConfig == nil {
+					log.Fatal("starting up - error setting up configuration: database config is nil")
+					return nil
+				}
+				return security.NewGormPrincipalManager(appCtx.TransactionHandler, appCtx.PasswordManager)
+			}
 			return security.NewInMemoryPrincipalManager(appCtx.PasswordManager)
 		},
 		TokenManager: func(appCtx *ApplicationContext) security.TokenManager {
