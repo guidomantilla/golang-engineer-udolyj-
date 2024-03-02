@@ -62,7 +62,7 @@ func handleMigration(args []string, fn MigrationFunction) error {
 
 	workingDirectory, _ := os.Getwd()
 	log.Info(fmt.Sprintf("working directory: %s", workingDirectory))
-	migrationsDirectory := filepath.Join(workingDirectory, "resources/migrations/mysql")
+	migrationsDirectory := filepath.Join(workingDirectory, "resources/migrations")
 
 	var driver database.Driver
 	if driver, err = mysql.WithInstance(db, &mysql.Config{}); err != nil {

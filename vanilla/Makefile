@@ -2,7 +2,7 @@
 phony-goal: ; @echo $@
 
 build: validate
-	docker compose -f docker/docker-compose.yml -p [pending]  up --detach
+	docker compose -f docker/docker-compose.yml -p bank up --detach
 
 validate: generate sort-import format vet lint coverage
 
@@ -37,13 +37,4 @@ sonarqube: coverage
 update-dependencies:
 	go get -u ./...
 	go get -t -u ./...
-	go mod tidy
-
-prepare:
-	go install github.com/kisielk/godepgraph@latest
-	go install github.com/incu6us/goimports-reviser/v3@latest
-	go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-	go install go.uber.org/mock/mockgen@latest
-	go install github.com/cweill/gotests/gotests@latest
-	go mod download
 	go mod tidy

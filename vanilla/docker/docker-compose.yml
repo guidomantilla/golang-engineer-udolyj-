@@ -1,0 +1,77 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  bank-mysql-server:
+    image: mysql:latest
+    platform: linux/x86_64
+    restart: unless-stopped
+    container_name: bank-mysql-server
+    ports:
+      - "3306:3306"
+      - "33060:33060"
+    volumes:
+      - bank-mysql-server:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: 'Raven123qweasd*+'
+      MYSQL_DATABASE: 'raven-dev'
+      MYSQL_USER: 'raven-dev'
+      MYSQL_PASSWORD: 'raven-dev*+'
+    networks:
+      - bank-network
+
+  bank-migration-app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: bank-migration-app
+    restart: no
+    container_name: bank-migration-app
+    command: sh -c "sleep 10 && /main.bin migrate up"
+    depends_on:
+      - bank-mysql-server
+    environment:
+      GIN_MODE: 'release'
+      LOG_LEVEL: 'debug'
+      HOST: '0.0.0.0'
+      DATASOURCE_DRIVER: 'mysql'
+      DATASOURCE_USERNAME: 'root'
+      DATASOURCE_PASSWORD: 'Raven123qweasd*+'
+      DATASOURCE_SERVER: 'bank-mysql-server:3306'
+      DATASOURCE_SERVICE: 'raven-dev'
+      DATASOURCE_URL: ':username::password@tcp(:server)/:service?charset=utf8&multiStatements=true&parseTime=True&loc=Local'
+    networks:
+      - bank-network
+
+  bank-server-app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: bank-server-app
+    restart: unless-stopped
+    container_name: bank-server-app
+    depends_on:
+      - bank-migration-app
+    ports:
+      - "8080:8080"
+    environment:
+      GIN_MODE: 'release'
+      LOG_LEVEL: 'debug'
+      HOST: '0.0.0.0'
+      DATASOURCE_DRIVER: 'mysql'
+      DATASOURCE_USERNAME: 'root'
+      DATASOURCE_PASSWORD: 'Raven123qweasd*+'
+      DATASOURCE_SERVER: 'bank-mysql-server:3306'
+      DATASOURCE_SERVICE: 'raven-dev'
+      DATASOURCE_URL: ':username::password@tcp(:server)/:service?charset=utf8&multiStatements=true&parseTime=True&loc=Local'
+    networks:
+      - bank-network
+
+volumes:
+  bank-mysql-server:
+    name: bank-mysql-server
+
+networks:
+  bank-network:
+    name: bank-network
+    driver: bridge
+
