@@ -41,15 +41,15 @@ func ExecuteCmdFn(_ *cobra.Command, args []string) {
 		}
 	}
 
+	var bankService services.BankService
 	builder.GrpcServer = func(appCtx *boot.ApplicationContext) (*grpc.ServiceDesc, any) {
-		grpcServer := rpc.NewBankApiGrpcServer(appCtx.AuthenticationService, appCtx.AuthorizationService, appCtx.PrincipalManager)
-		return &rpc.BankApi_ServiceDesc, grpcServer
+		bankService = services.NewDefaultBankService(appCtx.TransactionHandler)
+		grpcServer := rpc.NewBankApiGrpcServer(appCtx.AuthenticationService, appCtx.AuthorizationService, bankService)
+		return &rpc.Api_ServiceDesc, grpcServer
 	}
 
+	bankRestServer := rest.NewDefaultBankApiRestServer(bankService)
 	err := boot.Init(appName, version, args, logger, enablers, builder, func(appCtx boot.ApplicationContext) error {
-
-		bankService := services.NewDefaultBankService(appCtx.TransactionHandler)
-		bankRestServer := rest.NewDefaultBankApiRestServer(bankService)
 
 		appCtx.PrivateRouter.POST("/accounts", bankRestServer.CreateAccount)
 		appCtx.PrivateRouter.POST("/transfers", bankRestServer.Transfer)

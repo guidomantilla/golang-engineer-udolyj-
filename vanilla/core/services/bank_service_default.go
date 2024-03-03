@@ -46,6 +46,7 @@ func (service *DefaultBankService) GetAccount(ctx context.Context, id *string) (
 		return nil, err
 	}
 
+	account.CustomerId = nil
 	return account, nil
 }
 
@@ -62,6 +63,7 @@ func (service *DefaultBankService) GetAccountWithEntries(ctx context.Context, id
 		return nil, err
 	}
 
+	account.CustomerId = nil
 	return account, nil
 }
 

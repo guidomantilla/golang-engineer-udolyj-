@@ -59,11 +59,21 @@ insert into auth_resources (name, application, enabled) values ('/api/accounts/:
 insert into auth_resources (name, application, enabled) values ('/api/accounts/:number/entries', 'golang-engineer-udolyj', true);
 insert into auth_resources (name, application, enabled) values ('/api/transfers', 'golang-engineer-udolyj', true);
 
+insert into auth_resources (name, application, enabled) values ('/Api/CreateAccount', 'golang-engineer-udolyj', true);
+insert into auth_resources (name, application, enabled) values ('/Api/Transfer', 'golang-engineer-udolyj', true);
+insert into auth_resources (name, application, enabled) values ('/Api/GetAccount', 'golang-engineer-udolyj', true);
+insert into auth_resources (name, application, enabled) values ('/Api/GetAccountWithEntries', 'golang-engineer-udolyj', true);
+
 insert into auth_roles (name, enabled) values ('admin', true);
 
 insert into auth_access_control_list (role, resource, permission, enabled) values ('admin', '/api/accounts', 'POST', true);
 insert into auth_access_control_list (role, resource, permission, enabled) values ('admin', '/api/accounts/:number', 'GET', true);
 insert into auth_access_control_list (role, resource, permission, enabled) values ('admin', '/api/accounts/:number/entries', 'GET', true);
 insert into auth_access_control_list (role, resource, permission, enabled) values ('admin', '/api/transfers', 'POST', true);
+
+insert into auth_access_control_list (role, resource, permission, enabled) values ('admin', '/Api/CreateAccount', 'N/A', true);
+insert into auth_access_control_list (role, resource, permission, enabled) values ('admin', '/Api/Transfer', 'N/A', true);
+insert into auth_access_control_list (role, resource, permission, enabled) values ('admin', '/Api/GetAccount', 'N/A', true);
+insert into auth_access_control_list (role, resource, permission, enabled) values ('admin', '/Api/GetAccountWithEntries', 'N/A', true);
 
 insert into auth_users (username, role, password, passphrase, enabled) values ('root', 'admin', '{bcrypt}$2a$10$YnYznUaxrsn7Zc7nOH93d.4Rrvjb8cozsx42N12Qt/GVrMajehwh.', '', true);

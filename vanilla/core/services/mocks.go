@@ -55,7 +55,7 @@ func (mr *MockBankServiceMockRecorder) CreateAccount(ctx, account any) *gomock.C
 }
 
 // GetAccount mocks base method.
-func (m *MockBankService) GetAccount(ctx context.Context, id *int) (*models.Account, error) {
+func (m *MockBankService) GetAccount(ctx context.Context, id *string) (*models.Account, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAccount", ctx, id)
 	ret0, _ := ret[0].(*models.Account)
@@ -70,7 +70,7 @@ func (mr *MockBankServiceMockRecorder) GetAccount(ctx, id any) *gomock.Call {
 }
 
 // GetAccountWithEntries mocks base method.
-func (m *MockBankService) GetAccountWithEntries(ctx context.Context, id *int) (*models.Account, error) {
+func (m *MockBankService) GetAccountWithEntries(ctx context.Context, id *string) (*models.Account, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAccountWithEntries", ctx, id)
 	ret0, _ := ret[0].(*models.Account)

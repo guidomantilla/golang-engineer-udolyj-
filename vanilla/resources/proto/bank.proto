@@ -22,7 +22,6 @@ message Principal {
   string token = 11;
 }
 
-
 message LoginRequest {
   string username = 1;
   string password = 3;
@@ -35,7 +34,73 @@ message LoginResponse {
   string token = 11;
 }
 
-service BankApi {
+message HealthResponse {
+  string status = 1;
+}
+
+message InfoResponse {
+  string appName = 1;
+}
+
+message CreateAccountRequest {
+  int64 ownerId = 1;
+  double balance = 2;
+}
+
+message CreateAccountResponse {
+  string id = 1;
+  int64 ownerId = 2;
+  double balance = 3;
+}
+
+message TransferRequest {
+  string from = 1;
+  string to = 2;
+  double amount = 3;
+}
+
+message TransferResponse {
+  string id = 1;
+  string from = 2;
+  string to = 3;
+  double amount = 4;
+}
+
+message GetAccountRequest {
+  string id = 1;
+}
+
+message Customer {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+  string phone = 4;
+}
+message Entry {
+  string id = 1;
+  string account = 2;
+  double amount = 3;
+}
+
+message GetAccountResponse {
+  string id = 1;
+  Customer owner = 3;
+  double balance = 4;
+}
+message GetAccountWithEntriesResponse {
+  string id = 1;
+  Customer owner = 3;
+  double balance = 4;
+  repeated Entry entries = 5;
+}
+
+
+service Api {
   rpc Login(LoginRequest) returns (LoginResponse);
-  rpc GetPrincipal(google.protobuf.Empty) returns (Principal);
+  rpc Health(google.protobuf.Empty) returns (HealthResponse);
+  rpc Info(google.protobuf.Empty) returns (InfoResponse);
+  rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
+  rpc Transfer(TransferRequest) returns (TransferResponse);
+  rpc GetAccount(GetAccountRequest) returns (GetAccountResponse);
+  rpc GetAccountWithEntries(GetAccountRequest) returns (GetAccountWithEntriesResponse);
 }

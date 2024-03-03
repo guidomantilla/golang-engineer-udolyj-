@@ -24,8 +24,8 @@ func (customer *Customer) TableName() string {
 
 type Account struct {
 	Id         *string   `gorm:"primaryKey" json:"id,omitempty"`
-	CustomerId *int64    `gorm:"column:owner" json:"owner,omitempty"`
-	Customer   *Customer `gorm:"foreignKey:CustomerId" json:"customer,omitempty"`
+	CustomerId *int64    `gorm:"column:owner" json:"ownerId,omitempty"`
+	Customer   *Customer `gorm:"foreignKey:CustomerId" json:"owner,omitempty"`
 	Balance    *float64  `gorm:"column:balance" json:"balance,omitempty"`
 	Entries    []*Entry  `gorm:"foreignKey:AccountId" json:"entries,omitempty"`
 }
