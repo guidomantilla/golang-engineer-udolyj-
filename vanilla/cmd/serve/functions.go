@@ -8,7 +8,9 @@ import (
 	"github.com/spf13/cobra"
 	"google.golang.org/grpc"
 
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/endpoints/rest"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/endpoints/rpc"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/services"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/boot"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/config"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/log"
@@ -16,14 +18,9 @@ import (
 
 func ExecuteCmdFn(_ *cobra.Command, args []string) {
 
-	ctx := context.Background()
-	logger := log.Custom()
+	ctx, logger := context.Background(), log.Custom()
 	appName, version := config.Application, config.Version
-	enablers := &boot.Enablers{
-		HttpServerEnabled: true,
-		GrpcServerEnabled: true,
-		DatabaseEnabled:   true,
-	}
+	enablers := &boot.Enablers{HttpServerEnabled: true, GrpcServerEnabled: true, DatabaseEnabled: true}
 
 	builder := boot.NewBeanBuilder(ctx)
 	builder.Config = func(appCtx *boot.ApplicationContext) {
@@ -32,21 +29,9 @@ func ExecuteCmdFn(_ *cobra.Command, args []string) {
 			log.Fatal(fmt.Sprintf("starting up - error setting up configuration: %s", err.Error()))
 		}
 
-		appCtx.HttpConfig = &boot.HttpConfig{
-			Host: cfg.Host,
-			Port: cfg.HttpPort,
-		}
-
-		appCtx.GrpcConfig = &boot.GrpcConfig{
-			Host: cfg.Host,
-			Port: cfg.GrpcPort,
-		}
-
-		appCtx.SecurityConfig = &boot.SecurityConfig{
-			TokenSignatureKey:    cfg.TokenSignatureKey,
-			TokenVerificationKey: cfg.TokenVerificationKey,
-		}
-
+		appCtx.HttpConfig = &boot.HttpConfig{Host: cfg.Host, Port: cfg.HttpPort}
+		appCtx.GrpcConfig = &boot.GrpcConfig{Host: cfg.Host, Port: cfg.GrpcPort}
+		appCtx.SecurityConfig = &boot.SecurityConfig{TokenSignatureKey: cfg.TokenSignatureKey, TokenVerificationKey: cfg.TokenVerificationKey}
 		appCtx.DatabaseConfig = &boot.DatabaseConfig{
 			DatasourceUrl:      cfg.DatasourceUrl,
 			DatasourceServer:   cfg.DatasourceServer,
@@ -62,10 +47,18 @@ func ExecuteCmdFn(_ *cobra.Command, args []string) {
 	}
 
 	err := boot.Init(appName, version, args, logger, enablers, builder, func(appCtx boot.ApplicationContext) error {
+
+		bankService := services.NewDefaultBankService(appCtx.TransactionHandler)
+		bankRestServer := rest.NewDefaultBankApiRestServer(bankService)
+
+		appCtx.PrivateRouter.POST("/accounts", bankRestServer.CreateAccount)
+		appCtx.PrivateRouter.POST("/transfers", bankRestServer.Transfer)
+		appCtx.PrivateRouter.GET("/accounts/:number", bankRestServer.GetAccount)
+		appCtx.PrivateRouter.GET("/accounts/:number/entries", bankRestServer.GetAccountWithEntries)
 		return nil
 	})
+
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-
 }

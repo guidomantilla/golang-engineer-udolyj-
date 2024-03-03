@@ -51,15 +51,15 @@ func (manager *GormPrincipalManager) Find(ctx context.Context, username string) 
 	var user *Principal
 	err := manager.transactionHandler.HandleTransaction(ctx, func(ctx context.Context, tx *gorm.DB) error {
 
-		var authPrincipals []AuthPrincipal
-		if err := tx.Find(&authPrincipals, "username = ? AND application = ?", username, config.Application).Error; err != nil {
+		var principals []AuthPrincipal
+		if err := tx.Find(&principals, "username = ? AND application = ?", username, config.Application).Error; err != nil {
 			return err
 		}
-		if len(authPrincipals) == 0 {
+		if len(principals) == 0 {
 			return errors.New("principal does not exists")
 		}
 
-		principal := authPrincipals[0]
+		principal := principals[0]
 		if principal.Role == nil || *(principal.Role) == "" {
 			return ErrAccountEmptyRole
 		}
@@ -73,16 +73,16 @@ func (manager *GormPrincipalManager) Find(ctx context.Context, username string) 
 		}
 
 		resources := make([]string, 0)
-		for _, principal := range authPrincipals {
+		for _, principal := range principals {
 			resources = append(resources, strings.Join([]string{*principal.Application, *principal.Permission, *principal.Resource}, " "))
 		}
 
 		user = &Principal{
-			Username:           authPrincipals[0].Username,
-			Role:               authPrincipals[0].Role,
-			Password:           authPrincipals[0].Password,
-			Passphrase:         authPrincipals[0].Passphrase,
-			Enabled:            authPrincipals[0].Enabled,
+			Username:           principal.Username,
+			Role:               principal.Role,
+			Password:           principal.Password,
+			Passphrase:         principal.Passphrase,
+			Enabled:            principal.Enabled,
 			NonLocked:          util.TruePrt(),
 			NonExpired:         util.TruePrt(),
 			PasswordNonExpired: util.TruePrt(),
@@ -111,9 +111,12 @@ func (manager *GormPrincipalManager) VerifyResource(ctx context.Context, usernam
 
 	return manager.transactionHandler.HandleTransaction(ctx, func(ctx context.Context, tx *gorm.DB) error {
 
-		principals := make([]AuthPrincipal, 0)
-		if err := tx.Find(&principals, username, resource).Error; err != nil {
+		var principals []AuthPrincipal
+		if err := tx.Find(&principals, "username = ? AND CONCAT(application, ' ', permission, ' ', resource) = ?", username, resource).Error; err != nil {
 			return err
+		}
+		if len(principals) == 0 {
+			return errors.New("principal resource undefined")
 		}
 
 		return nil

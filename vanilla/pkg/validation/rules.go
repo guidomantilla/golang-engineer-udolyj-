@@ -33,7 +33,7 @@ func ValidateStructIsRequired(structName string, field string, value any) error 
 // Fields
 
 type AllowedFieldTypes interface {
-	*int64 | *string | *bool
+	*int64 | *float64 | *string | *bool
 }
 
 func ValidateFieldMustBeUndefined[T AllowedFieldTypes](structName string, field string, value T) error {

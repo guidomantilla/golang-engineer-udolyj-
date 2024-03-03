@@ -8,3 +8,92 @@
 
 // Package services is a generated GoMock package.
 package services
+
+import (
+	context "context"
+	reflect "reflect"
+
+	models "git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/models"
+	gomock "go.uber.org/mock/gomock"
+)
+
+// MockBankService is a mock of BankService interface.
+type MockBankService struct {
+	ctrl     *gomock.Controller
+	recorder *MockBankServiceMockRecorder
+}
+
+// MockBankServiceMockRecorder is the mock recorder for MockBankService.
+type MockBankServiceMockRecorder struct {
+	mock *MockBankService
+}
+
+// NewMockBankService creates a new mock instance.
+func NewMockBankService(ctrl *gomock.Controller) *MockBankService {
+	mock := &MockBankService{ctrl: ctrl}
+	mock.recorder = &MockBankServiceMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockBankService) EXPECT() *MockBankServiceMockRecorder {
+	return m.recorder
+}
+
+// CreateAccount mocks base method.
+func (m *MockBankService) CreateAccount(ctx context.Context, account *models.Account) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateAccount", ctx, account)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CreateAccount indicates an expected call of CreateAccount.
+func (mr *MockBankServiceMockRecorder) CreateAccount(ctx, account any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAccount", reflect.TypeOf((*MockBankService)(nil).CreateAccount), ctx, account)
+}
+
+// GetAccount mocks base method.
+func (m *MockBankService) GetAccount(ctx context.Context, id *int) (*models.Account, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAccount", ctx, id)
+	ret0, _ := ret[0].(*models.Account)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAccount indicates an expected call of GetAccount.
+func (mr *MockBankServiceMockRecorder) GetAccount(ctx, id any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAccount", reflect.TypeOf((*MockBankService)(nil).GetAccount), ctx, id)
+}
+
+// GetAccountWithEntries mocks base method.
+func (m *MockBankService) GetAccountWithEntries(ctx context.Context, id *int) (*models.Account, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAccountWithEntries", ctx, id)
+	ret0, _ := ret[0].(*models.Account)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAccountWithEntries indicates an expected call of GetAccountWithEntries.
+func (mr *MockBankServiceMockRecorder) GetAccountWithEntries(ctx, id any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAccountWithEntries", reflect.TypeOf((*MockBankService)(nil).GetAccountWithEntries), ctx, id)
+}
+
+// Transfer mocks base method.
+func (m *MockBankService) Transfer(ctx context.Context, transfer *models.Transfer) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Transfer", ctx, transfer)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Transfer indicates an expected call of Transfer.
+func (mr *MockBankServiceMockRecorder) Transfer(ctx, transfer any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Transfer", reflect.TypeOf((*MockBankService)(nil).Transfer), ctx, transfer)
+}

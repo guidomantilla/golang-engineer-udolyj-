@@ -56,12 +56,14 @@ select u.username,
 
 insert into auth_resources (name, application, enabled) values ('/api/accounts', 'golang-engineer-udolyj', true);
 insert into auth_resources (name, application, enabled) values ('/api/accounts/:number', 'golang-engineer-udolyj', true);
+insert into auth_resources (name, application, enabled) values ('/api/accounts/:number/entries', 'golang-engineer-udolyj', true);
 insert into auth_resources (name, application, enabled) values ('/api/transfers', 'golang-engineer-udolyj', true);
 
 insert into auth_roles (name, enabled) values ('admin', true);
 
 insert into auth_access_control_list (role, resource, permission, enabled) values ('admin', '/api/accounts', 'POST', true);
 insert into auth_access_control_list (role, resource, permission, enabled) values ('admin', '/api/accounts/:number', 'GET', true);
+insert into auth_access_control_list (role, resource, permission, enabled) values ('admin', '/api/accounts/:number/entries', 'GET', true);
 insert into auth_access_control_list (role, resource, permission, enabled) values ('admin', '/api/transfers', 'POST', true);
 
-insert into auth_users (username, role, password, passphrase, enabled) values ('root', 'admin', '{bcrypt}$2a$10$DMrp3hAmPg0EV16AchnF0.rdTiHJ/g3k7J9klzGVZoiZOzSR3u/le', '', true);
+insert into auth_users (username, role, password, passphrase, enabled) values ('root', 'admin', '{bcrypt}$2a$10$YnYznUaxrsn7Zc7nOH93d.4Rrvjb8cozsx42N12Qt/GVrMajehwh.', '', true);

@@ -15,22 +15,22 @@ insert into core_customers (id, name, email, phone) values (4, 'Georgina Haze', 
 
 create table if not exists core_accounts
 (
-    id         int primary key,
+    id         varchar(100) primary key,
     owner      int not null,
     balance    decimal(10, 2) default 0.00 not null
 );
 
 create table if not exists core_entries
 (
-    id         int primary key,
-    account_id int not null,
+    id         varchar(100) primary key,
+    account_id varchar(100) not null,
     amount     decimal(10, 2) default 0.00 not null
 );
 
 create table if not exists core_transfers
 (
-    id         int primary key,
-    from_account_id int not null,
-    to_account_id int not null,
+    id         varchar(100) primary key,
+    from_account_id varchar(100) not null,
+    to_account_id varchar(100) not null,
     amount     decimal(10, 2) default 0.00 not null
 );

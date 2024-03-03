@@ -27,6 +27,7 @@ func Init(appName string, version string, args []string, logger log.Logger, enab
 		log.Fatal("starting up - error setting up the application: args is nil")
 	}
 
+	//TODO: Check if it is actually needed this logger reference
 	if logger == nil {
 		log.Fatal("starting up - error setting up the application: logger is nil")
 	}
