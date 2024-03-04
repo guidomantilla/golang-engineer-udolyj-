@@ -6,18 +6,14 @@
 package main
 
 import (
-	"kratos/internal/biz"
-	"kratos/internal/conf"
-	"kratos/internal/data"
-	"kratos/internal/server"
-	"kratos/internal/service"
-
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/kratos/internal/providers"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/config"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/log"
 	"github.com/go-kratos/kratos/v2"
-	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"
 )
 
 // wireApp init kratos application.
-func wireApp(*conf.Server, *conf.Data, log.Logger) (*kratos.App, func(), error) {
-	panic(wire.Build(server.ProviderSet, data.ProviderSet, biz.ProviderSet, service.ProviderSet, newApp))
+func wireApp(cfg *config.Config, logger log.Logger) (*kratos.App, error) {
+	panic(wire.Build(providers.ProviderSet, newApp))
 }

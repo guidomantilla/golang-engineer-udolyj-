@@ -108,7 +108,7 @@ service Api {
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Use this API to login user and get access token & refresh token";
+      description: "Use this API to login user and get access token";
       summary: "Login user";
     };
   }

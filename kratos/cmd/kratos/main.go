@@ -1,16 +1,14 @@
 package main
 
 import (
-	"flag"
+	"context"
+	"fmt"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/config"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/environment"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/log"
 	"os"
 
-	"kratos/internal/conf"
-
 	"github.com/go-kratos/kratos/v2"
-	"github.com/go-kratos/kratos/v2/config"
-	"github.com/go-kratos/kratos/v2/config/file"
-	"github.com/go-kratos/kratos/v2/log"
-	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
 
@@ -23,15 +21,9 @@ var (
 	Name string
 	// Version is the version of the compiled software.
 	Version string
-	// flagconf is the config flag.
-	flagconf string
 
 	id, _ = os.Hostname()
 )
-
-func init() {
-	flag.StringVar(&flagconf, "conf", "../../configs", "config path, eg: -conf config.yaml")
-}
 
 func newApp(logger log.Logger, gs *grpc.Server, hs *http.Server) *kratos.App {
 	return kratos.New(
@@ -39,46 +31,22 @@ func newApp(logger log.Logger, gs *grpc.Server, hs *http.Server) *kratos.App {
 		kratos.Name(Name),
 		kratos.Version(Version),
 		kratos.Metadata(map[string]string{}),
-		kratos.Logger(logger),
-		kratos.Server(
-			gs,
-			hs,
-		),
+		kratos.Server(gs, hs),
 	)
 }
 
 func main() {
-	flag.Parse()
-	logger := log.With(log.NewStdLogger(os.Stdout),
-		"ts", log.DefaultTimestamp,
-		"caller", log.DefaultCaller,
-		"service.id", id,
-		"service.name", Name,
-		"service.version", Version,
-		"trace.id", tracing.TraceID(),
-		"span.id", tracing.SpanID(),
-	)
-	c := config.New(
-		config.WithSource(
-			file.NewSource(flagconf),
-		),
-	)
-	defer c.Close()
-
-	if err := c.Load(); err != nil {
-		panic(err)
+	ctx, logger := context.Background(), log.Custom()
+	environment := environment.NewDefaultEnvironment(environment.WithArraySource("env-vars", os.Environ()))
+	var cfg config.Config
+	if err := config.Process(ctx, environment, &cfg); err != nil {
+		log.Fatal(fmt.Sprintf("starting up - error setting up configuration: %s", err.Error()))
 	}
 
-	var bc conf.Bootstrap
-	if err := c.Scan(&bc); err != nil {
-		panic(err)
-	}
-
-	app, cleanup, err := wireApp(bc.Server, bc.Data, logger)
+	app, err := wireApp(&cfg, logger)
 	if err != nil {
 		panic(err)
 	}
-	defer cleanup()
 
 	// start and wait for stop signal
 	if err := app.Run(); err != nil {

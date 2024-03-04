@@ -1,6 +1,6 @@
-package service
+package facade
 
 import "github.com/google/wire"
 
 // ProviderSet is service providers.
-var ProviderSet = wire.NewSet(NewBankService)
+var ProviderSet = wire.NewSet(NewBankApiFacade)
