@@ -3,8 +3,8 @@ package security
 import (
 	"context"
 
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/log"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/validation"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/log"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/validation"
 )
 
 type DefaultAuthenticationService struct {

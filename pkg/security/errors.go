@@ -3,7 +3,7 @@ package security
 import (
 	"errors"
 
-	cerrors "git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/errors"
+	cerrors "git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/errors"
 )
 
 var (

@@ -5,7 +5,7 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/datasource"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/datasource"
 )
 
 func BuildMockGormTransactionHandler() (datasource.TransactionHandler, sqlmock.Sqlmock) {

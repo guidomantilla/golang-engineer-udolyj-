@@ -10,7 +10,7 @@ import (
 	"github.com/qmdx00/lifecycle"
 	"google.golang.org/grpc"
 
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/log"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/log"
 )
 
 var _ lifecycle.Server = (*GrpcServer)(nil)

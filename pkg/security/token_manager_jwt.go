@@ -6,7 +6,7 @@ import (
 
 	jwt "github.com/golang-jwt/jwt/v5"
 
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/util"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/util"
 )
 
 type DefaultClaims struct {

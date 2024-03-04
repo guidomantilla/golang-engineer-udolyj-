@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/properties"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/properties"
 )
 
 func Test_NewDefaultEnvironment(t *testing.T) {

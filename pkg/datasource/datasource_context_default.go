@@ -3,7 +3,7 @@ package datasource
 import (
 	"strings"
 
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/log"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/log"
 )
 
 type DefaultDatasourceContext struct {

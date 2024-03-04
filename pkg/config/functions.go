@@ -5,7 +5,7 @@ import (
 
 	envconfig "github.com/sethvargo/go-envconfig"
 
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/environment"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/environment"
 )
 
 func Process(ctx context.Context, environment environment.Environment, config interface{}) error {

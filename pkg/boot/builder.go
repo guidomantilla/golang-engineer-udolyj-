@@ -13,11 +13,11 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/datasource"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/environment"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/log"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/rest"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/security"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/datasource"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/environment"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/log"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/rest"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/security"
 )
 
 type EnvironmentBuilderFunc func(appCtx *ApplicationContext) environment.Environment

@@ -8,7 +8,7 @@ import (
 
 	"github.com/qmdx00/lifecycle"
 
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/log"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/log"
 )
 
 var _ lifecycle.Server = (*HttpServer)(nil)

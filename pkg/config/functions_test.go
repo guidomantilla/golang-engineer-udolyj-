@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/environment"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/environment"
 )
 
 func TestProcess(t *testing.T) {

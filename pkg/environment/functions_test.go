@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/properties"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/properties"
 )
 
 func Test_retrieveSingleton(t *testing.T) {

@@ -5,7 +5,7 @@ import (
 
 	"gorm.io/gorm"
 
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/log"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/log"
 )
 
 type DefaultDatasource struct {

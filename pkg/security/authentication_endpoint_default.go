@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/log"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/rest"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/log"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/rest"
 )
 
 type DefaultAuthenticationEndpoint struct {

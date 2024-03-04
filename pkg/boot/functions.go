@@ -11,8 +11,8 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/log"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/server"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/log"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/server"
 )
 
 type InitDelegateFunc func(ctx ApplicationContext) error

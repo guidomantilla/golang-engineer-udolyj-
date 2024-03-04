@@ -3,7 +3,7 @@ package environment
 import (
 	"strconv"
 
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/properties"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/properties"
 )
 
 var _ Environment = (*DefaultEnvironment)(nil)

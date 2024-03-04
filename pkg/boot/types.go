@@ -9,11 +9,11 @@ import (
 	"google.golang.org/grpc"
 	"gorm.io/gorm"
 
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/datasource"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/environment"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/log"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/security"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/util"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/datasource"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/environment"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/log"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/security"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/util"
 )
 
 type Enablers struct {

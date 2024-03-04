@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/environment"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/environment"
 )
 
 func TestEnvironmentLookup_Lookup(t *testing.T) {
