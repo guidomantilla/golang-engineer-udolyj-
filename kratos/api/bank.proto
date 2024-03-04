@@ -1,0 +1,121 @@
+syntax = "proto3";
+
+package api;
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "kratos/api";
+
+message Exception {
+  uint32 code = 1;
+  string message = 2;
+  repeated string errors = 3;
+}
+
+message Principal {
+  string username = 1;
+  string role = 2;
+  string password = 3;
+  string passphrase = 4;
+  bool enabled = 5;
+  bool non_locked = 6;
+  bool non_expired = 7;
+  bool password_non_expired = 8;
+  bool signup_done = 9;
+  repeated string resources = 10;
+  string token = 11;
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 3;
+}
+
+message LoginResponse {
+  string username = 1;
+  string role = 2;
+  repeated string resources = 10;
+  string token = 11;
+}
+
+message HealthResponse {
+  string status = 1;
+}
+
+message InfoResponse {
+  string appName = 1;
+}
+
+message CreateAccountRequest {
+  int64 ownerId = 1;
+  double balance = 2;
+}
+
+message CreateAccountResponse {
+  string id = 1;
+  int64 ownerId = 2;
+  double balance = 3;
+}
+
+message TransferRequest {
+  string from = 1;
+  string to = 2;
+  double amount = 3;
+}
+
+message TransferResponse {
+  string id = 1;
+  string from = 2;
+  string to = 3;
+  double amount = 4;
+}
+
+message GetAccountRequest {
+  string id = 1;
+}
+
+message Customer {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+  string phone = 4;
+}
+message Entry {
+  string id = 1;
+  string account = 2;
+  double amount = 3;
+}
+
+message GetAccountResponse {
+  string id = 1;
+  Customer owner = 3;
+  double balance = 4;
+}
+message GetAccountWithEntriesResponse {
+  string id = 1;
+  Customer owner = 3;
+  double balance = 4;
+  repeated Entry entries = 5;
+}
+
+
+service Api {
+  rpc Login(LoginRequest) returns (LoginResponse) {
+    option (google.api.http) = {
+      post: "/login"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to login user and get access token & refresh token";
+      summary: "Login user";
+    };
+  }
+  rpc Health(google.protobuf.Empty) returns (HealthResponse);
+  rpc Info(google.protobuf.Empty) returns (InfoResponse);
+  rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
+  rpc Transfer(TransferRequest) returns (TransferResponse);
+  rpc GetAccount(GetAccountRequest) returns (GetAccountResponse);
+  rpc GetAccountWithEntries(GetAccountRequest) returns (GetAccountWithEntriesResponse);
+}
