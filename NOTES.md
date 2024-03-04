@@ -18,7 +18,7 @@ The Kratos and Wire solution will be found on the kratos folder.
 - Project skeleton copied from my own [repositories](https://github.com/guidomantilla?tab=repositories&q=go-feather-&type=&language=go&sort=)
 - cmd folder contains serve command for staring the server, and migrate command for database migrations
 - core folder contains the business logic
-- pkg folder contains reusable code
+- pkg folder contains reusable code (NOTE: move to higher level)
 - docker folder contains the docker-compose file for running the database and the vanilla version of this project
 - resources folder will contain the database migrations, proto files and postman collection
 - tools folder contains the wire code generation for the vanilla version of this project
@@ -54,8 +54,19 @@ Note: DAO (Data Access Object), Repository Pattern, or any other DAL (Data Acces
 
 
 ### Kratos Approach
+- Project skeleton based from kratos CLI
+- pkg folder reuse as much as possible 
+- wire was used for wiring pkg dependencies
+
 
 #### Kratos Design
+As mentioned earlier, pkg folder contains reusable code.
+On core folder, the layout follows a simplistic 3 layer design, as follows:
+* internal/server: contains the code for the REST API & Grpc endpoints. No business logic should be here.
+* internal/facade: contains code that proxies services layer
+* internal/models: contains the code for the domain models
+* internal/services: contains the code for the business logic
+  Note: DAO (Data Access Object), Repository Pattern, or any other DAL (Data Access Layer) is not used in this project. The database logic is directly in the services using GORM
 
 
 

@@ -10,6 +10,7 @@ import (
 	context "context"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,15 +20,24 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationApiCreateAccount = "/api.Api/CreateAccount"
+const OperationApiHealth = "/api.Api/Health"
+const OperationApiInfo = "/api.Api/Info"
 const OperationApiLogin = "/api.Api/Login"
 
 type ApiHTTPServer interface {
+	CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error)
+	Health(context.Context, *emptypb.Empty) (*HealthResponse, error)
+	Info(context.Context, *emptypb.Empty) (*InfoResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 }
 
 func RegisterApiHTTPServer(s *http.Server, srv ApiHTTPServer) {
 	r := s.Route("/")
 	r.POST("/login", _Api_Login0_HTTP_Handler(srv))
+	r.GET("/health", _Api_Health0_HTTP_Handler(srv))
+	r.GET("/info", _Api_Info0_HTTP_Handler(srv))
+	r.POST("/api/create_account", _Api_CreateAccount0_HTTP_Handler(srv))
 }
 
 func _Api_Login0_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
@@ -52,7 +62,70 @@ func _Api_Login0_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 	}
 }
 
+func _Api_Health0_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in emptypb.Empty
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApiHealth)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.Health(ctx, req.(*emptypb.Empty))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*HealthResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Api_Info0_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in emptypb.Empty
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApiInfo)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.Info(ctx, req.(*emptypb.Empty))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*InfoResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Api_CreateAccount0_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateAccountRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationApiCreateAccount)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateAccount(ctx, req.(*CreateAccountRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CreateAccountResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type ApiHTTPClient interface {
+	CreateAccount(ctx context.Context, req *CreateAccountRequest, opts ...http.CallOption) (rsp *CreateAccountResponse, err error)
+	Health(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *HealthResponse, err error)
+	Info(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *InfoResponse, err error)
 	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *LoginResponse, err error)
 }
 
@@ -62,6 +135,45 @@ type ApiHTTPClientImpl struct {
 
 func NewApiHTTPClient(client *http.Client) ApiHTTPClient {
 	return &ApiHTTPClientImpl{client}
+}
+
+func (c *ApiHTTPClientImpl) CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...http.CallOption) (*CreateAccountResponse, error) {
+	var out CreateAccountResponse
+	pattern := "/api/create_account"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationApiCreateAccount))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *ApiHTTPClientImpl) Health(ctx context.Context, in *emptypb.Empty, opts ...http.CallOption) (*HealthResponse, error) {
+	var out HealthResponse
+	pattern := "/health"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationApiHealth))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *ApiHTTPClientImpl) Info(ctx context.Context, in *emptypb.Empty, opts ...http.CallOption) (*InfoResponse, error) {
+	var out InfoResponse
+	pattern := "/info"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationApiInfo))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *ApiHTTPClientImpl) Login(ctx context.Context, in *LoginRequest, opts ...http.CallOption) (*LoginResponse, error) {

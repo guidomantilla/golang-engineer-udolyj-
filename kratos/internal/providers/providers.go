@@ -101,11 +101,3 @@ func ProvideBankApiHttpFacade(authenticationService security.AuthenticationServi
 var ProviderSet = wire.NewSet(GormProviderSet, DatasourceProviderSet, SecurityProviderSet, AuthProviderSet,
 	ProvideBankService, ProvideBankApiFacade, ProvideBankApiHttpFacade,
 	server.NewGRPCServer, server.NewHTTPServer)
-
-/*
-// ProviderSet is service providers.
-var ProviderSet = wire.NewSet(datasource.NewTransactionHandler, security.NewBcryptPasswordEncoder,
-	security.NewDefaultPasswordGenerator, security.NewDefaultPasswordManager, security.NewGormPrincipalManager,
-	security.NewDefaultAuthenticationService, security.NewDefaultAuthorizationService, services.NewDefaultBankService,
-	facade.NewBankApiFacade, server.NewGRPCServer, server.NewHTTPServer)
-*/

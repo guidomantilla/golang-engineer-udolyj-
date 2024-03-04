@@ -6,6 +6,8 @@ import (
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/config"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/environment"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/log"
+	klog "github.com/go-kratos/kratos/v2/log"
+	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"os"
 
 	"github.com/go-kratos/kratos/v2"
@@ -25,17 +27,28 @@ var (
 	id, _ = os.Hostname()
 )
 
-func newApp(logger log.Logger, gs *grpc.Server, hs *http.Server) *kratos.App {
+func newApp(gs *grpc.Server, hs *http.Server) *kratos.App {
+	klogger := klog.With(klog.NewStdLogger(os.Stdout),
+		"ts", klog.DefaultTimestamp,
+		"caller", klog.DefaultCaller,
+		"service.id", id,
+		"service.name", Name,
+		"service.version", Version,
+		"trace.id", tracing.TraceID(),
+		"span.id", tracing.SpanID(),
+	)
 	return kratos.New(
 		kratos.ID(id),
 		kratos.Name(Name),
 		kratos.Version(Version),
 		kratos.Metadata(map[string]string{}),
 		kratos.Server(gs, hs),
+		kratos.Logger(klogger),
 	)
 }
 
 func main() {
+
 	ctx, logger := context.Background(), log.Custom()
 	environment := environment.NewDefaultEnvironment(environment.WithArraySource("env-vars", os.Environ()))
 	var cfg config.Config

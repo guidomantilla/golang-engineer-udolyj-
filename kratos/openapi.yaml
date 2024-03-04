@@ -6,6 +6,48 @@ info:
     title: Api API
     version: 0.0.1
 paths:
+    /api/create_account:
+        post:
+            tags:
+                - Api
+            operationId: Api_CreateAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.CreateAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.CreateAccountResponse'
+    /health:
+        get:
+            tags:
+                - Api
+            operationId: Api_Health
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.HealthResponse'
+    /info:
+        get:
+            tags:
+                - Api
+            operationId: Api_Info
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.InfoResponse'
     /login:
         post:
             tags:
@@ -26,6 +68,34 @@ paths:
                                 $ref: '#/components/schemas/api.LoginResponse'
 components:
     schemas:
+        api.CreateAccountRequest:
+            type: object
+            properties:
+                ownerId:
+                    type: string
+                balance:
+                    type: number
+                    format: double
+        api.CreateAccountResponse:
+            type: object
+            properties:
+                id:
+                    type: string
+                ownerId:
+                    type: string
+                balance:
+                    type: number
+                    format: double
+        api.HealthResponse:
+            type: object
+            properties:
+                status:
+                    type: string
+        api.InfoResponse:
+            type: object
+            properties:
+                appName:
+                    type: string
         api.LoginRequest:
             type: object
             properties:

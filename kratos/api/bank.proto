@@ -112,9 +112,34 @@ service Api {
       summary: "Login user";
     };
   }
-  rpc Health(google.protobuf.Empty) returns (HealthResponse);
-  rpc Info(google.protobuf.Empty) returns (InfoResponse);
-  rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
+  rpc Health(google.protobuf.Empty) returns (HealthResponse){
+    option (google.api.http) = {
+      get: "/health"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to check the health of the service";
+      summary: "Health check";
+    };
+  };
+  rpc Info(google.protobuf.Empty) returns (InfoResponse){
+    option (google.api.http) = {
+      get: "/info"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to get the information of the service";
+      summary: "Info check";
+    };
+  };
+  rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse){
+    option (google.api.http) = {
+      post: "/api/create_account"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to create account";
+      summary: "Account creation";
+    };
+  };
   rpc Transfer(TransferRequest) returns (TransferResponse);
   rpc GetAccount(GetAccountRequest) returns (GetAccountResponse);
   rpc GetAccountWithEntries(GetAccountRequest) returns (GetAccountWithEntriesResponse);

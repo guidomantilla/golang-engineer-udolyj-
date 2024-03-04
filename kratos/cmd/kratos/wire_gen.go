@@ -39,6 +39,6 @@ func wireApp(cfg *config.Config, logger log.Logger) (*kratos.App, error) {
 	grpcServer := server.NewGRPCServer(cfg, apiServer)
 	apiHTTPServer := providers.ProvideBankApiHttpFacade(authenticationService, authorizationService, bankService)
 	httpServer := server.NewHTTPServer(cfg, apiHTTPServer)
-	app := newApp(logger, grpcServer, httpServer)
+	app := newApp(grpcServer, httpServer)
 	return app, nil
 }

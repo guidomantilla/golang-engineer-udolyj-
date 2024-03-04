@@ -52,15 +52,13 @@ build:
 .PHONY: generate
 # generate
 generate:
-	go mod tidy
 	go get github.com/google/wire/cmd/wire@latest
-	go generate ./...
+	GOWORK=off go generate ./...
 
 .PHONY: all
 # generate all
 all:
 	make api;
-	make config;
 	make generate;
 
 # show help

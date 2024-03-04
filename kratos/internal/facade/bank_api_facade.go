@@ -6,6 +6,7 @@ import (
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/kratos/api"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/kratos/internal/models"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/kratos/internal/services"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/config"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/errors"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/security"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/util"
@@ -263,7 +264,7 @@ func (facade *BankApiFacade) authorize(ctx context.Context) (context.Context, er
 
 	token := header[1]
 	serverStream := grpc.ServerTransportStreamFromContext(ctx)
-	resource := []string{"CHANGE ME", "N/A", serverStream.Method()}
+	resource := []string{config.Application, "N/A", serverStream.Method()}
 
 	var err error
 	var principal *security.Principal
