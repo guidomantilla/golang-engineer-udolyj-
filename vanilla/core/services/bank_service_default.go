@@ -83,7 +83,7 @@ func (service *DefaultBankService) Transfer(ctx context.Context, transfer *model
 			return errors.New("from account cannot have negative balance")
 		}
 
-		if *(fromAccount.Balance)-*(transfer.Amount) < 0 {
+		if *(fromAccount.Balance)-*(transfer.Amount) <= 0 {
 			return errors.New("from account with insufficient funds")
 		}
 

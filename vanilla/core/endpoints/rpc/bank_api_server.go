@@ -3,18 +3,19 @@ package rpc
 import (
 	"context"
 	"fmt"
+	"strings"
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/protobuf/types/known/emptypb"
+
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/models"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/services"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/config"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/errors"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/security"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/util"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/validation"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/metadata"
-	"google.golang.org/protobuf/types/known/emptypb"
-	"strings"
-
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/security"
 )
 
 type BankApiGrpcServer struct {
@@ -269,6 +270,11 @@ func (server *BankApiGrpcServer) authorize(ctx context.Context) (context.Context
 		return ctx, err
 	}
 
-	ctx = context.WithValue(ctx, security.PrincipalCtxKey, principal)
+	PrincipalCtxKey := struct {
+		PrincipalCtxKey string
+	}{
+		PrincipalCtxKey: security.PrincipalCtxKey,
+	}
+	ctx = context.WithValue(ctx, PrincipalCtxKey, principal)
 	return ctx, nil
 }

@@ -2,7 +2,7 @@
 phony-goal: ; @echo $@
 
 build: validate
-	docker compose -f docker/docker-compose.yml -p bank up --detach
+	docker compose -f docker/docker-compose.yml -p bank-vanilla up --detach
 
 validate: generate sort-import format vet lint coverage
 
@@ -31,10 +31,3 @@ coverage: test
 	go tool cover -func=coverage.out
 	go tool cover -html=coverage.out -o coverage.html
 
-sonarqube: coverage
-	sonar-scanner
-
-update-dependencies:
-	go get -u ./...
-	go get -t -u ./...
-	go mod tidy

@@ -18,31 +18,31 @@ import (
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
-// MockBankApiClient is a mock of BankApiClient interface.
-type MockBankApiClient struct {
+// MockApiClient is a mock of ApiClient interface.
+type MockApiClient struct {
 	ctrl     *gomock.Controller
-	recorder *MockBankApiClientMockRecorder
+	recorder *MockApiClientMockRecorder
 }
 
-// MockBankApiClientMockRecorder is the mock recorder for MockBankApiClient.
-type MockBankApiClientMockRecorder struct {
-	mock *MockBankApiClient
+// MockApiClientMockRecorder is the mock recorder for MockApiClient.
+type MockApiClientMockRecorder struct {
+	mock *MockApiClient
 }
 
-// NewMockBankApiClient creates a new mock instance.
-func NewMockBankApiClient(ctrl *gomock.Controller) *MockBankApiClient {
-	mock := &MockBankApiClient{ctrl: ctrl}
-	mock.recorder = &MockBankApiClientMockRecorder{mock}
+// NewMockApiClient creates a new mock instance.
+func NewMockApiClient(ctrl *gomock.Controller) *MockApiClient {
+	mock := &MockApiClient{ctrl: ctrl}
+	mock.recorder = &MockApiClientMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockBankApiClient) EXPECT() *MockBankApiClientMockRecorder {
+func (m *MockApiClient) EXPECT() *MockApiClientMockRecorder {
 	return m.recorder
 }
 
 // CreateAccount mocks base method.
-func (m *MockBankApiClient) CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error) {
+func (m *MockApiClient) CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
@@ -55,14 +55,14 @@ func (m *MockBankApiClient) CreateAccount(ctx context.Context, in *CreateAccount
 }
 
 // CreateAccount indicates an expected call of CreateAccount.
-func (mr *MockBankApiClientMockRecorder) CreateAccount(ctx, in any, opts ...any) *gomock.Call {
+func (mr *MockApiClientMockRecorder) CreateAccount(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAccount", reflect.TypeOf((*MockBankApiClient)(nil).CreateAccount), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAccount", reflect.TypeOf((*MockApiClient)(nil).CreateAccount), varargs...)
 }
 
 // GetAccount mocks base method.
-func (m *MockBankApiClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error) {
+func (m *MockApiClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
@@ -75,14 +75,14 @@ func (m *MockBankApiClient) GetAccount(ctx context.Context, in *GetAccountReques
 }
 
 // GetAccount indicates an expected call of GetAccount.
-func (mr *MockBankApiClientMockRecorder) GetAccount(ctx, in any, opts ...any) *gomock.Call {
+func (mr *MockApiClientMockRecorder) GetAccount(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAccount", reflect.TypeOf((*MockBankApiClient)(nil).GetAccount), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAccount", reflect.TypeOf((*MockApiClient)(nil).GetAccount), varargs...)
 }
 
 // GetAccountWithEntries mocks base method.
-func (m *MockBankApiClient) GetAccountWithEntries(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountWithEntriesResponse, error) {
+func (m *MockApiClient) GetAccountWithEntries(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountWithEntriesResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
@@ -95,14 +95,14 @@ func (m *MockBankApiClient) GetAccountWithEntries(ctx context.Context, in *GetAc
 }
 
 // GetAccountWithEntries indicates an expected call of GetAccountWithEntries.
-func (mr *MockBankApiClientMockRecorder) GetAccountWithEntries(ctx, in any, opts ...any) *gomock.Call {
+func (mr *MockApiClientMockRecorder) GetAccountWithEntries(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAccountWithEntries", reflect.TypeOf((*MockBankApiClient)(nil).GetAccountWithEntries), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAccountWithEntries", reflect.TypeOf((*MockApiClient)(nil).GetAccountWithEntries), varargs...)
 }
 
 // Health mocks base method.
-func (m *MockBankApiClient) Health(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*HealthResponse, error) {
+func (m *MockApiClient) Health(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*HealthResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
@@ -115,14 +115,14 @@ func (m *MockBankApiClient) Health(ctx context.Context, in *emptypb.Empty, opts 
 }
 
 // Health indicates an expected call of Health.
-func (mr *MockBankApiClientMockRecorder) Health(ctx, in any, opts ...any) *gomock.Call {
+func (mr *MockApiClientMockRecorder) Health(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Health", reflect.TypeOf((*MockBankApiClient)(nil).Health), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Health", reflect.TypeOf((*MockApiClient)(nil).Health), varargs...)
 }
 
 // Info mocks base method.
-func (m *MockBankApiClient) Info(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*InfoResponse, error) {
+func (m *MockApiClient) Info(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*InfoResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
@@ -135,14 +135,14 @@ func (m *MockBankApiClient) Info(ctx context.Context, in *emptypb.Empty, opts ..
 }
 
 // Info indicates an expected call of Info.
-func (mr *MockBankApiClientMockRecorder) Info(ctx, in any, opts ...any) *gomock.Call {
+func (mr *MockApiClientMockRecorder) Info(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Info", reflect.TypeOf((*MockBankApiClient)(nil).Info), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Info", reflect.TypeOf((*MockApiClient)(nil).Info), varargs...)
 }
 
 // Login mocks base method.
-func (m *MockBankApiClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
+func (m *MockApiClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
@@ -155,14 +155,14 @@ func (m *MockBankApiClient) Login(ctx context.Context, in *LoginRequest, opts ..
 }
 
 // Login indicates an expected call of Login.
-func (mr *MockBankApiClientMockRecorder) Login(ctx, in any, opts ...any) *gomock.Call {
+func (mr *MockApiClientMockRecorder) Login(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Login", reflect.TypeOf((*MockBankApiClient)(nil).Login), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Login", reflect.TypeOf((*MockApiClient)(nil).Login), varargs...)
 }
 
 // Transfer mocks base method.
-func (m *MockBankApiClient) Transfer(ctx context.Context, in *TransferRequest, opts ...grpc.CallOption) (*TransferResponse, error) {
+func (m *MockApiClient) Transfer(ctx context.Context, in *TransferRequest, opts ...grpc.CallOption) (*TransferResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, in}
 	for _, a := range opts {
@@ -175,37 +175,37 @@ func (m *MockBankApiClient) Transfer(ctx context.Context, in *TransferRequest, o
 }
 
 // Transfer indicates an expected call of Transfer.
-func (mr *MockBankApiClientMockRecorder) Transfer(ctx, in any, opts ...any) *gomock.Call {
+func (mr *MockApiClientMockRecorder) Transfer(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Transfer", reflect.TypeOf((*MockBankApiClient)(nil).Transfer), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Transfer", reflect.TypeOf((*MockApiClient)(nil).Transfer), varargs...)
 }
 
-// MockBankApiServer is a mock of BankApiServer interface.
-type MockBankApiServer struct {
+// MockApiServer is a mock of ApiServer interface.
+type MockApiServer struct {
 	ctrl     *gomock.Controller
-	recorder *MockBankApiServerMockRecorder
+	recorder *MockApiServerMockRecorder
 }
 
-// MockBankApiServerMockRecorder is the mock recorder for MockBankApiServer.
-type MockBankApiServerMockRecorder struct {
-	mock *MockBankApiServer
+// MockApiServerMockRecorder is the mock recorder for MockApiServer.
+type MockApiServerMockRecorder struct {
+	mock *MockApiServer
 }
 
-// NewMockBankApiServer creates a new mock instance.
-func NewMockBankApiServer(ctrl *gomock.Controller) *MockBankApiServer {
-	mock := &MockBankApiServer{ctrl: ctrl}
-	mock.recorder = &MockBankApiServerMockRecorder{mock}
+// NewMockApiServer creates a new mock instance.
+func NewMockApiServer(ctrl *gomock.Controller) *MockApiServer {
+	mock := &MockApiServer{ctrl: ctrl}
+	mock.recorder = &MockApiServerMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockBankApiServer) EXPECT() *MockBankApiServerMockRecorder {
+func (m *MockApiServer) EXPECT() *MockApiServerMockRecorder {
 	return m.recorder
 }
 
 // CreateAccount mocks base method.
-func (m *MockBankApiServer) CreateAccount(arg0 context.Context, arg1 *CreateAccountRequest) (*CreateAccountResponse, error) {
+func (m *MockApiServer) CreateAccount(arg0 context.Context, arg1 *CreateAccountRequest) (*CreateAccountResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateAccount", arg0, arg1)
 	ret0, _ := ret[0].(*CreateAccountResponse)
@@ -214,13 +214,13 @@ func (m *MockBankApiServer) CreateAccount(arg0 context.Context, arg1 *CreateAcco
 }
 
 // CreateAccount indicates an expected call of CreateAccount.
-func (mr *MockBankApiServerMockRecorder) CreateAccount(arg0, arg1 any) *gomock.Call {
+func (mr *MockApiServerMockRecorder) CreateAccount(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAccount", reflect.TypeOf((*MockBankApiServer)(nil).CreateAccount), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAccount", reflect.TypeOf((*MockApiServer)(nil).CreateAccount), arg0, arg1)
 }
 
 // GetAccount mocks base method.
-func (m *MockBankApiServer) GetAccount(arg0 context.Context, arg1 *GetAccountRequest) (*GetAccountResponse, error) {
+func (m *MockApiServer) GetAccount(arg0 context.Context, arg1 *GetAccountRequest) (*GetAccountResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAccount", arg0, arg1)
 	ret0, _ := ret[0].(*GetAccountResponse)
@@ -229,13 +229,13 @@ func (m *MockBankApiServer) GetAccount(arg0 context.Context, arg1 *GetAccountReq
 }
 
 // GetAccount indicates an expected call of GetAccount.
-func (mr *MockBankApiServerMockRecorder) GetAccount(arg0, arg1 any) *gomock.Call {
+func (mr *MockApiServerMockRecorder) GetAccount(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAccount", reflect.TypeOf((*MockBankApiServer)(nil).GetAccount), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAccount", reflect.TypeOf((*MockApiServer)(nil).GetAccount), arg0, arg1)
 }
 
 // GetAccountWithEntries mocks base method.
-func (m *MockBankApiServer) GetAccountWithEntries(arg0 context.Context, arg1 *GetAccountRequest) (*GetAccountWithEntriesResponse, error) {
+func (m *MockApiServer) GetAccountWithEntries(arg0 context.Context, arg1 *GetAccountRequest) (*GetAccountWithEntriesResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAccountWithEntries", arg0, arg1)
 	ret0, _ := ret[0].(*GetAccountWithEntriesResponse)
@@ -244,13 +244,13 @@ func (m *MockBankApiServer) GetAccountWithEntries(arg0 context.Context, arg1 *Ge
 }
 
 // GetAccountWithEntries indicates an expected call of GetAccountWithEntries.
-func (mr *MockBankApiServerMockRecorder) GetAccountWithEntries(arg0, arg1 any) *gomock.Call {
+func (mr *MockApiServerMockRecorder) GetAccountWithEntries(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAccountWithEntries", reflect.TypeOf((*MockBankApiServer)(nil).GetAccountWithEntries), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAccountWithEntries", reflect.TypeOf((*MockApiServer)(nil).GetAccountWithEntries), arg0, arg1)
 }
 
 // Health mocks base method.
-func (m *MockBankApiServer) Health(arg0 context.Context, arg1 *emptypb.Empty) (*HealthResponse, error) {
+func (m *MockApiServer) Health(arg0 context.Context, arg1 *emptypb.Empty) (*HealthResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Health", arg0, arg1)
 	ret0, _ := ret[0].(*HealthResponse)
@@ -259,13 +259,13 @@ func (m *MockBankApiServer) Health(arg0 context.Context, arg1 *emptypb.Empty) (*
 }
 
 // Health indicates an expected call of Health.
-func (mr *MockBankApiServerMockRecorder) Health(arg0, arg1 any) *gomock.Call {
+func (mr *MockApiServerMockRecorder) Health(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Health", reflect.TypeOf((*MockBankApiServer)(nil).Health), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Health", reflect.TypeOf((*MockApiServer)(nil).Health), arg0, arg1)
 }
 
 // Info mocks base method.
-func (m *MockBankApiServer) Info(arg0 context.Context, arg1 *emptypb.Empty) (*InfoResponse, error) {
+func (m *MockApiServer) Info(arg0 context.Context, arg1 *emptypb.Empty) (*InfoResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Info", arg0, arg1)
 	ret0, _ := ret[0].(*InfoResponse)
@@ -274,13 +274,13 @@ func (m *MockBankApiServer) Info(arg0 context.Context, arg1 *emptypb.Empty) (*In
 }
 
 // Info indicates an expected call of Info.
-func (mr *MockBankApiServerMockRecorder) Info(arg0, arg1 any) *gomock.Call {
+func (mr *MockApiServerMockRecorder) Info(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Info", reflect.TypeOf((*MockBankApiServer)(nil).Info), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Info", reflect.TypeOf((*MockApiServer)(nil).Info), arg0, arg1)
 }
 
 // Login mocks base method.
-func (m *MockBankApiServer) Login(arg0 context.Context, arg1 *LoginRequest) (*LoginResponse, error) {
+func (m *MockApiServer) Login(arg0 context.Context, arg1 *LoginRequest) (*LoginResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Login", arg0, arg1)
 	ret0, _ := ret[0].(*LoginResponse)
@@ -289,13 +289,13 @@ func (m *MockBankApiServer) Login(arg0 context.Context, arg1 *LoginRequest) (*Lo
 }
 
 // Login indicates an expected call of Login.
-func (mr *MockBankApiServerMockRecorder) Login(arg0, arg1 any) *gomock.Call {
+func (mr *MockApiServerMockRecorder) Login(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Login", reflect.TypeOf((*MockBankApiServer)(nil).Login), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Login", reflect.TypeOf((*MockApiServer)(nil).Login), arg0, arg1)
 }
 
 // Transfer mocks base method.
-func (m *MockBankApiServer) Transfer(arg0 context.Context, arg1 *TransferRequest) (*TransferResponse, error) {
+func (m *MockApiServer) Transfer(arg0 context.Context, arg1 *TransferRequest) (*TransferResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Transfer", arg0, arg1)
 	ret0, _ := ret[0].(*TransferResponse)
@@ -304,54 +304,54 @@ func (m *MockBankApiServer) Transfer(arg0 context.Context, arg1 *TransferRequest
 }
 
 // Transfer indicates an expected call of Transfer.
-func (mr *MockBankApiServerMockRecorder) Transfer(arg0, arg1 any) *gomock.Call {
+func (mr *MockApiServerMockRecorder) Transfer(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Transfer", reflect.TypeOf((*MockBankApiServer)(nil).Transfer), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Transfer", reflect.TypeOf((*MockApiServer)(nil).Transfer), arg0, arg1)
 }
 
-// mustEmbedUnimplementedBankApiServer mocks base method.
-func (m *MockBankApiServer) mustEmbedUnimplementedBankApiServer() {
+// mustEmbedUnimplementedApiServer mocks base method.
+func (m *MockApiServer) mustEmbedUnimplementedApiServer() {
 	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "mustEmbedUnimplementedBankApiServer")
+	m.ctrl.Call(m, "mustEmbedUnimplementedApiServer")
 }
 
-// mustEmbedUnimplementedBankApiServer indicates an expected call of mustEmbedUnimplementedBankApiServer.
-func (mr *MockBankApiServerMockRecorder) mustEmbedUnimplementedBankApiServer() *gomock.Call {
+// mustEmbedUnimplementedApiServer indicates an expected call of mustEmbedUnimplementedApiServer.
+func (mr *MockApiServerMockRecorder) mustEmbedUnimplementedApiServer() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "mustEmbedUnimplementedBankApiServer", reflect.TypeOf((*MockBankApiServer)(nil).mustEmbedUnimplementedBankApiServer))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "mustEmbedUnimplementedApiServer", reflect.TypeOf((*MockApiServer)(nil).mustEmbedUnimplementedApiServer))
 }
 
-// MockUnsafeBankApiServer is a mock of UnsafeBankApiServer interface.
-type MockUnsafeBankApiServer struct {
+// MockUnsafeApiServer is a mock of UnsafeApiServer interface.
+type MockUnsafeApiServer struct {
 	ctrl     *gomock.Controller
-	recorder *MockUnsafeBankApiServerMockRecorder
+	recorder *MockUnsafeApiServerMockRecorder
 }
 
-// MockUnsafeBankApiServerMockRecorder is the mock recorder for MockUnsafeBankApiServer.
-type MockUnsafeBankApiServerMockRecorder struct {
-	mock *MockUnsafeBankApiServer
+// MockUnsafeApiServerMockRecorder is the mock recorder for MockUnsafeApiServer.
+type MockUnsafeApiServerMockRecorder struct {
+	mock *MockUnsafeApiServer
 }
 
-// NewMockUnsafeBankApiServer creates a new mock instance.
-func NewMockUnsafeBankApiServer(ctrl *gomock.Controller) *MockUnsafeBankApiServer {
-	mock := &MockUnsafeBankApiServer{ctrl: ctrl}
-	mock.recorder = &MockUnsafeBankApiServerMockRecorder{mock}
+// NewMockUnsafeApiServer creates a new mock instance.
+func NewMockUnsafeApiServer(ctrl *gomock.Controller) *MockUnsafeApiServer {
+	mock := &MockUnsafeApiServer{ctrl: ctrl}
+	mock.recorder = &MockUnsafeApiServerMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockUnsafeBankApiServer) EXPECT() *MockUnsafeBankApiServerMockRecorder {
+func (m *MockUnsafeApiServer) EXPECT() *MockUnsafeApiServerMockRecorder {
 	return m.recorder
 }
 
-// mustEmbedUnimplementedBankApiServer mocks base method.
-func (m *MockUnsafeBankApiServer) mustEmbedUnimplementedBankApiServer() {
+// mustEmbedUnimplementedApiServer mocks base method.
+func (m *MockUnsafeApiServer) mustEmbedUnimplementedApiServer() {
 	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "mustEmbedUnimplementedBankApiServer")
+	m.ctrl.Call(m, "mustEmbedUnimplementedApiServer")
 }
 
-// mustEmbedUnimplementedBankApiServer indicates an expected call of mustEmbedUnimplementedBankApiServer.
-func (mr *MockUnsafeBankApiServerMockRecorder) mustEmbedUnimplementedBankApiServer() *gomock.Call {
+// mustEmbedUnimplementedApiServer indicates an expected call of mustEmbedUnimplementedApiServer.
+func (mr *MockUnsafeApiServerMockRecorder) mustEmbedUnimplementedApiServer() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "mustEmbedUnimplementedBankApiServer", reflect.TypeOf((*MockUnsafeBankApiServer)(nil).mustEmbedUnimplementedBankApiServer))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "mustEmbedUnimplementedApiServer", reflect.TypeOf((*MockUnsafeApiServer)(nil).mustEmbedUnimplementedApiServer))
 }

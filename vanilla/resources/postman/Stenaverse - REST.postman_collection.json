@@ -63,7 +63,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"owner\": 1,\n    \"balance\": 9\n}",
+					"raw": "{\n    \"ownerId\": 1,\n    \"balance\": 9\n}",
 					"options": {
 						"raw": {
 							"language": "json"
