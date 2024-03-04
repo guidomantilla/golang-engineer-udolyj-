@@ -4,6 +4,9 @@ import (
 	"context"
 	"fmt"
 
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/boot"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/config"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/log"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/spf13/cobra"
 	"google.golang.org/grpc"
@@ -11,9 +14,6 @@ import (
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/endpoints/rest"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/endpoints/rpc"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/services"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/boot"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/config"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/log"
 )
 
 func ExecuteCmdFn(_ *cobra.Command, args []string) {

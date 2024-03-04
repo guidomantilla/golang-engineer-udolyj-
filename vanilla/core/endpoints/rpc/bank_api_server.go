@@ -5,17 +5,17 @@ import (
 	"fmt"
 	"strings"
 
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/config"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/errors"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/security"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/util"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/validation"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/protobuf/types/known/emptypb"
 
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/models"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/services"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/config"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/errors"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/security"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/util"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/validation"
 )
 
 var (

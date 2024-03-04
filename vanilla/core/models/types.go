@@ -1,10 +1,9 @@
 package models
 
 import (
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/util"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
-
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/util"
 )
 
 // Customer represents a customer of the bank

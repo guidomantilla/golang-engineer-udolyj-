@@ -6,12 +6,12 @@ import (
 	"reflect"
 	"testing"
 
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/datasource"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/mocks"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/util"
 	sqlmock "github.com/DATA-DOG/go-sqlmock"
 
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/models"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/datasource"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/mocks"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/util"
 )
 
 func TestNewDefaultBankService(t *testing.T) {

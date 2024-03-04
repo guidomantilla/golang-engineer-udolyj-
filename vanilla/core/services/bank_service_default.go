@@ -4,11 +4,11 @@ import (
 	"context"
 	"errors"
 
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/datasource"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/util"
 	"gorm.io/gorm"
 
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/models"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/datasource"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/util"
 )
 
 var (

@@ -8,15 +8,14 @@ import (
 	"path/filepath"
 	"strings"
 
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/config"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/environment"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/log"
 	migrate "github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database"
 	"github.com/golang-migrate/migrate/v4/database/mysql"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"github.com/spf13/cobra"
-
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/config"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/environment"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/log"
 )
 
 func UpCmdFn(_ *cobra.Command, args []string) {

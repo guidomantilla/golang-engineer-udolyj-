@@ -4,12 +4,12 @@ import (
 	"io"
 	"net/http"
 
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/rest"
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/validation"
 	"github.com/gin-gonic/gin"
 
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/models"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/services"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/rest"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/validation"
 )
 
 var (

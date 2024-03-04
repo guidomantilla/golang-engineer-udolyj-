@@ -5,11 +5,11 @@ import (
 	"reflect"
 	"testing"
 
+	"git.codesubmit.io/stena-group/golang-engineer-udolyj/pkg/security"
 	"google.golang.org/protobuf/types/known/emptypb"
 
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/models"
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/core/services"
-	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/security"
 )
 
 func TestBankApiGrpcServer_mustEmbedUnimplementedApiServer(t *testing.T) {
