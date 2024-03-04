@@ -11,6 +11,10 @@ import (
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/util"
 )
 
+var (
+	_ BankService = (*DefaultBankService)(nil)
+)
+
 type DefaultBankService struct {
 	transactionHandler datasource.TransactionHandler
 }

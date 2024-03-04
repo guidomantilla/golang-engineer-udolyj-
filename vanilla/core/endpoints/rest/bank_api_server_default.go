@@ -12,6 +12,10 @@ import (
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/validation"
 )
 
+var (
+	_ BankApiRestServer = (*DefaultBankApiRestServer)(nil)
+)
+
 type DefaultBankApiRestServer struct {
 	bankService services.BankService
 }

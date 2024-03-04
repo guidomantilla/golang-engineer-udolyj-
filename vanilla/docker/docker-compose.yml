@@ -1,15 +1,15 @@
 version: "3.9"  # optional since v1.27.0
 services:
-  bank-mysql-server:
+  bank-vanilla-mysql-server:
     image: mysql:latest
     platform: linux/x86_64
     restart: unless-stopped
-    container_name: bank-mysql-server
+    container_name: bank-vanilla-mysql-server
     ports:
       - "3306:3306"
       - "33060:33060"
     volumes:
-      - bank-mysql-server:/var/lib/mysql
+      - bank-vanilla-mysql-server:/var/lib/mysql
     environment:
       MYSQL_ROOT_HOST: '%'
       MYSQL_ROOT_PASSWORD: 'Raven123qweasd*+'
@@ -17,18 +17,18 @@ services:
       MYSQL_USER: 'raven-dev'
       MYSQL_PASSWORD: 'raven-dev*+'
     networks:
-      - bank-network
+      - bank-vanilla-network
 
-  bank-migration-app:
+  bank-vanilla-migration-app:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    image: bank-migration-app
+    image: bank-vanilla-migration-app
     restart: no
-    container_name: bank-migration-app
-    command: sh -c "sleep 10 && /main.bin migrate up"
+    container_name: bank-vanilla-migration-app
+    command: sh -c "sleep 30 && /main.bin migrate up"
     depends_on:
-      - bank-mysql-server
+      - bank-vanilla-mysql-server
     environment:
       GIN_MODE: 'release'
       LOG_LEVEL: 'debug'
@@ -36,21 +36,21 @@ services:
       DATASOURCE_DRIVER: 'mysql'
       DATASOURCE_USERNAME: 'root'
       DATASOURCE_PASSWORD: 'Raven123qweasd*+'
-      DATASOURCE_SERVER: 'bank-mysql-server:3306'
+      DATASOURCE_SERVER: 'bank-vanilla-mysql-server:3306'
       DATASOURCE_SERVICE: 'raven-dev'
       DATASOURCE_URL: ':username::password@tcp(:server)/:service?charset=utf8&multiStatements=true&parseTime=True&loc=Local'
     networks:
-      - bank-network
+      - bank-vanilla-network
 
-  bank-server-app:
+  bank-vanilla-server-app:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    image: bank-server-app
+    image: bank-vanilla-server-app
     restart: unless-stopped
-    container_name: bank-server-app
+    container_name: bank-vanilla-server-app
     depends_on:
-      - bank-migration-app
+      - bank-vanilla-migration-app
     ports:
       - "8080:8080"
     environment:
@@ -60,18 +60,18 @@ services:
       DATASOURCE_DRIVER: 'mysql'
       DATASOURCE_USERNAME: 'root'
       DATASOURCE_PASSWORD: 'Raven123qweasd*+'
-      DATASOURCE_SERVER: 'bank-mysql-server:3306'
+      DATASOURCE_SERVER: 'bank-vanilla-mysql-server:3306'
       DATASOURCE_SERVICE: 'raven-dev'
       DATASOURCE_URL: ':username::password@tcp(:server)/:service?charset=utf8&multiStatements=true&parseTime=True&loc=Local'
     networks:
-      - bank-network
+      - bank-vanilla-network
 
 volumes:
-  bank-mysql-server:
-    name: bank-mysql-server
+  bank-vanilla-mysql-server:
+    name: bank-vanilla-mysql-server
 
 networks:
-  bank-network:
-    name: bank-network
+  bank-vanilla-network:
+    name: bank-vanilla-network
     driver: bridge
 

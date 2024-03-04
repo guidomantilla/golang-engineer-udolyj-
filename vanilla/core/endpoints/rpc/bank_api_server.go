@@ -18,6 +18,10 @@ import (
 	"git.codesubmit.io/stena-group/golang-engineer-udolyj/vanilla/pkg/validation"
 )
 
+var (
+	_ ApiServer = (*BankApiGrpcServer)(nil)
+)
+
 type BankApiGrpcServer struct {
 	authenticationService security.AuthenticationService
 	authorizationService  security.AuthorizationService
