@@ -28,7 +28,6 @@ vendor/
 
 # Sonarqube
 .scannerwork/
-sonar-project.properties
 
 .envrc
 
